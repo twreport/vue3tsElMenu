@@ -1,6 +1,6 @@
 <template>
     <div class="register-box">
-        <h1>Register</h1>
+        <h1>Seedss Register</h1>
         <el-form ref="ruleFormRef" :model="ruleForm" status-icon :rules="rules" label-width="120px"
             class="register-ruleForm">
             <el-form-item label="Username" prop="username">
@@ -126,8 +126,5 @@ const resetForm = (formEl: FormInstance | undefined) => {
     margin-top: 10em;
 }
 
-.register-ruleForm {
-    /* margin-top: 20em; */
-}
 </style>
   

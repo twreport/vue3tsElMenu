@@ -1,12 +1,38 @@
 import axios from "axios";
 import { AxiosResponse } from "axios";
 import { ElMessage } from "element-plus";
+// import { createPinia } from "pinia";
+// import { useUserStore } from "@/store/user";
+// import pinia from "../store/store";
+
+const userStoreStr = sessionStorage.getItem('userStore');
+let userStore = {
+    access_token: ''
+};
+console.log('userStoreStr',userStoreStr);
+
+if(userStoreStr){
+  userStore = JSON.parse(userStoreStr);
+}
+// console.log('req');
+
+// const pinia = createPinia();
+// const userRequestStore = useUserStore(pinia);
+
+const access_token = userStore.access_token;
+console.log('token', access_token);
+// if(access_token === null){
+// location.reload();
+// }
 
 const request = axios.create({
     baseURL: import.meta.env.VITE_APP_BASE_API,
     // 超时设置
     timeout: 15000,
-    headers: { 'Content-Type': 'application/json;charset=utf-8' }
+    headers: {
+        'access_token': access_token,
+        'Content-Type': 'application/json;charset=utf-8'
+    }
 })
 
 request.interceptors.request.use(
@@ -31,7 +57,7 @@ request.interceptors.response.use(
                 }
             }
             return response.data;
-        } 
+        }
         return Promise.reject(response.statusText);
     }
 )
